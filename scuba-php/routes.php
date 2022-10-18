@@ -1,5 +1,4 @@
 <?php
-
 switch ($_GET["page"]){
     case "register":
         do_register();
