@@ -8,3 +8,7 @@ function crud_create($user){
     $data = json_encode($data);
     file_put_contents(arquivo, $data);
 }
+
+function check_email($email){
+    return verifica_email($email);
+}

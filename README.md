@@ -13,13 +13,29 @@
     
     Já o **controller.php** usará a função do arquivo **view.php** para renderizar o conteúdo da resposta.
 
+
 ## Desafio 2
     > Você criará o arquivo crud.php e a função crud_create($user) para salvar os dados enviados pelo usuário no formulário de registro.
 
     Você não usará banco de dados. A função crud_create($user) deverá ler o conteúdo do arquivo /data/users.json, acrescentar um novo elemento ao array e atualizar o conteúdo do arquivo users.json.
 
-    Para a etapa da persistência, você poderá usar as funções file_get_contents, file_put_contents, json_encode e json_decode.
-
     Quando chegar uma requisição POST do formulário de registro, você deverá chamar a função que salva os dados e redirecionar para a url /?page=login usando a função header(), se houver alguma informação no array $_POST.
 
     Quando chegar uma requisição GET à URL /?page=register, a mesma do formulário de registro, você deverá mostrar o formulário presente no template ‘register’.
+
+
+## Desafio 3
+    > Validar os dados do usuário e, caso haja algum erro no formulário, a requisição deverá retroceder para a tela anterior. Uma mensagem de erro deverá ser exibida na tela APENAS quando um erro acontecer.
+
+    Os dados precisam ser avaliados da seguinte forma:
+
+       1. Não deve haver mais de um registro por email;
+       2. A senha deve ter mais de 10 caracteres e ser igual ao campo de validação.          
+
+    A equipe responsável pelo front-end já deixou o layout pronto com mensagens de sucesso e erro fixas no sistema, e isso deve aparecer apenas no momento certo! Atualmente, essas mensagens aparecem sempre e em todas as telas. Você deverá modificar esse comportamento e só exibi-las quando precisar informar algo ao usuário.
+
+    Caso o usuário tenha êxito no cadastro, haverá redirecionamento para a tela de login, onde uma mensagem de sucesso irá informar que ele ainda precisa confirmar o email.
+
+    Um caminho válido seria criar uma função no arquivo crud.php, que recebe um email como parâmetro e, caso encontre um valor, retorne um array ou objeto correspondente; e caso não encontre, retorne false.
+
+    A validação irá exigir um novo arquivo focado nisso, então você pode criar o validation.php. Cada requisição que demande validação de formulário deverá ter uma função correspondente neste novo arquivo!
