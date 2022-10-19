@@ -12,10 +12,11 @@ function do_register(){
             unset($_POST['person']['password-confirm']);
             
             $result = save($_POST['person']);
-
+            
             if($result['sucesso']){
+                echo 'envia e-mail';
                 send_confirmation_mail($_POST['person']['email']);
-
+                echo 'enviou';
                 $msg['sucesso'] = "
                     <p>
                         Usuário criado com sucesso.<br/>
@@ -64,9 +65,10 @@ function do_change_password(){
 
 function save($user):array{
     $return = ['sucesso' => false, 'msg' => ''];
-
+    
     if(!check_email($user['email'])){
-        $return['sucesso'] = crud_create($user);
+        crud_create($user);
+        $return['sucesso'] = true;
     }else{
         $return['msg'] = "E-mail já atribuído a um usuário!";
     }
@@ -80,6 +82,6 @@ function confirm_user($user){
 }
 
 function do_validation($token){
-    echo $token;
+    echo ssl_decrypt($token);
     //render_view("login.view");
 }

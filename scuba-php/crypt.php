@@ -1,7 +1,7 @@
 <?php
 
 function ssl_decrypt($data){
-    return openssl_decrypt($data['msg'], "aes-256-cbc-hmac-sha1", $data);
+    return openssl_decrypt($data, "aes-256-cbc-hmac-sha1", $data);
 }
 
 function ssl_crypt($data){
