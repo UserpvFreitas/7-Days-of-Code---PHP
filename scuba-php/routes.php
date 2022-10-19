@@ -12,6 +12,9 @@ switch ($_GET["page"]){
     case "change_password":
         do_change_password();
         break;
+    case "mail-validation":
+        do_validation($_GET['token']);
+        break;
     default:
         do_not_found();
         break;

@@ -12,3 +12,16 @@ function crud_create($user){
 function check_email($email){
     return verifica_email($email);
 }
+
+function crud_do_validation($email){
+    $data = file_get_contents(arquivo);
+    $data = json_decode($data, true);
+
+    foreach($data as $d){
+        if($d['email'] == $email){
+            return 'validou';
+        } 
+    }
+
+    return false;
+}

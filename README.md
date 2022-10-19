@@ -29,13 +29,18 @@
 
     Os dados precisam ser avaliados da seguinte forma:
 
-       1. Não deve haver mais de um registro por email;
+       1. Não deve haver mais de um registro por e-mail;
        2. A senha deve ter mais de 10 caracteres e ser igual ao campo de validação.          
 
     A equipe responsável pelo front-end já deixou o layout pronto com mensagens de sucesso e erro fixas no sistema, e isso deve aparecer apenas no momento certo! Atualmente, essas mensagens aparecem sempre e em todas as telas. Você deverá modificar esse comportamento e só exibi-las quando precisar informar algo ao usuário.
 
-    Caso o usuário tenha êxito no cadastro, haverá redirecionamento para a tela de login, onde uma mensagem de sucesso irá informar que ele ainda precisa confirmar o email.
+    Caso o usuário tenha êxito no cadastro, haverá redirecionamento para a tela de login, onde uma mensagem de sucesso irá informar que ele ainda precisa confirmar o e-mail.
 
-    Um caminho válido seria criar uma função no arquivo crud.php, que recebe um email como parâmetro e, caso encontre um valor, retorne um array ou objeto correspondente; e caso não encontre, retorne false.
+    Um caminho válido seria criar uma função no arquivo crud.php, que recebe um e-mail como parâmetro e, caso encontre um valor, retorne um array ou objeto correspondente; e caso não encontre, retorne false.
 
     A validação irá exigir um novo arquivo focado nisso, então você pode criar o validation.php. Cada requisição que demande validação de formulário deverá ter uma função correspondente neste novo arquivo!
+
+
+## Desafio 4
+    > Acrescentar um campo para salvar o usuário recém-criado, uma flag com valor padrão. Após o clique no link do e-mail, essa flag será alterada e, somente após isso, o usuário poderá logar no sistema.
+    Ao criar um registro, deverá ser enviado um e-mail para o usuário cadastrado, com o link de validação de conta de e-mail

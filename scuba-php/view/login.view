@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="./resource/style.css">
     <title>Login</title>
 </head>
-<body>
-    <div class="mensagem-sucesso"></div>
+<body>    
     <h1>Scuba<span>PHP</span></h1>
     <form action="/?page=login&from=login" method="POST">        
+        <div class="mensagem-sucesso"></div>
         <label for="login">Email</label>
         <input type="text" name="person[email]" required>
         <!--<span class="mensagem-erro email"></span>-->
