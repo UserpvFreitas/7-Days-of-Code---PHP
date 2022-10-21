@@ -8,8 +8,8 @@ function valida_registro($pessoa):string{
     else return "";
 }
 
-function verifica_email($email){
-    $data = file_get_contents(arquivo);
+function verifica_email($email, $arquivo){
+    $data = file_get_contents($arquivo);
     $data = json_decode($data, true);
 
     foreach($data as $d){

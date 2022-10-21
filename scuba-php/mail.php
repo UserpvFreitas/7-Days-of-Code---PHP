@@ -17,8 +17,8 @@ function send_mail($subject, $message, $address){
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = 'tls';
-    $mail->Username = 'pvAlura@gmail.com';
-    $mail->Password = 'onuxqocuxdoxlxpz';
+    $mail->Username = EMAIL;
+    $mail->Password = PWD;
     $mail->Port = 587;
     $mail->CharSet = "UTF-8";
 
@@ -30,12 +30,12 @@ function send_mail($subject, $message, $address){
     $mail->Body = $message;
 
     $mail->send();
-    /*
-    if(!$mail->send()) {
+    
+    /*if(!$mail->send()) {
         echo 'Não foi possível enviar a mensagem.<br>';
         echo 'Erro: ' . $mail->ErrorInfo;
     } else {
         echo 'Mensagem enviada.';
-    }
-    */
+    }*/
+    
 }

@@ -44,3 +44,21 @@
 ## Desafio 4
     > Acrescentar um campo para salvar o usuário recém-criado, uma flag com valor padrão. Após o clique no link do e-mail, essa flag será alterada e, somente após isso, o usuário poderá logar no sistema.
     Ao criar um registro, deverá ser enviado um e-mail para o usuário cadastrado, com o link de validação de conta de e-mail
+
+
+## Desafio 5
+    > Fazer:
+       1. O tratamento do token de validação do e-mail
+       2. Ativar ou não a conta, caso o token seja ou não válido;
+       3. Redirecionar para a tela de login onde uma mensagem de erro ou sucesso será exibida.
+       4. Criar o login. Crie o arquivo auth.php
+
+
+## Desafio 6    
+    > Gerar a página inicial dinamicamente com os dados do usuário logado, desenvolver a funcionalidade de deletar os dados e ativar o botão de logout!
+       
+    
+
+    
+
+    

@@ -8,15 +8,15 @@ function do_register(){
             render_view("register.view", $msg);    
         }else{
             $_POST["person"]["mail_validation"] = false;
+            $_POST["person"]["password"] = md5($_POST["person"]["password"]);
             
             unset($_POST['person']['password-confirm']);
             
             $result = save($_POST['person']);
             
             if($result['sucesso']){
-                echo 'envia e-mail';
                 send_confirmation_mail($_POST['person']['email']);
-                echo 'enviou';
+                
                 $msg['sucesso'] = "
                     <p>
                         Usuário criado com sucesso.<br/>
@@ -34,9 +34,19 @@ function do_register(){
     }
 }
 
-function do_login(){  
+function do_login(){ 
     if($_POST['confirmation'] == ""){
-        render_view("login.view");
+        if($_POST['person']['email'] != "" && $_POST['person']['password'] != ""){
+            if(authentication($_POST['person']['email'], $_POST['person']['password'])){
+                header("Location: /");
+                die();
+            }else{
+                $msg = ['sucesso' => '', 'erro' => 'Usuário ou/e senha incorretos'];
+                render_view("login.view", $msg);    
+            }
+        }else{
+            render_view("login.view");
+        }
     }else{
         $msg = ['erro' => "", 'sucesso' => ""];
 
@@ -51,6 +61,14 @@ function do_login(){
     }
 }
 
+function do_logout(){
+    auth_logout();    
+}
+
+function do_delete_account(){
+    crud_delete($_SESSION['email']);
+}
+
 function do_not_found(){
     render_view("not_found.view");
 }
@@ -59,8 +77,24 @@ function do_forget(){
     render_view("forget_password.view");
 }
 
-function do_change_password(){
+function do_forget_password(){
+    $request_method = $_SERVER['REQUEST_METHOD'];
+
+    if($request_method == 'post'){
+
+    }else{
+
+    }
+    
+    render_view("forget_password.view");
+}
+
+function do_change_password(){    
     render_view("change_password.view");
+}
+
+function do_home(){
+    render_view('home.view');
 }
 
 function save($user):array{
@@ -82,6 +116,6 @@ function confirm_user($user){
 }
 
 function do_validation($token){
-    echo ssl_decrypt($token);
-    //render_view("login.view");
+    crud_update(ssl_decrypt($token));
+    render_view("login.view");
 }
