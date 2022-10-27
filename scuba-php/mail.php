@@ -11,6 +11,18 @@ function send_confirmation_mail($email){
     );
 }
 
+
+function send_password_redefinition($email){
+    $dataHoje = (new DateTime())->format('Y-m-d');
+    
+    $token = urlencode(ssl_crypt(base64_encode("$email:$dataHoje")));
+    send_mail(
+        "Redefinição de senha", 
+        "Para redefinir sua senha, clique <a href=\"http://localhost:4242?page=change-password&token=".$token."\">aqui</a>", 
+        $email
+    );
+}
+
 function send_mail($subject, $message, $address){
     $mail = new PHPMailer();
     $mail->isSMTP();

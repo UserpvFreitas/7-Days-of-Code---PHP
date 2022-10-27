@@ -1,11 +1,17 @@
 <?php
 
-function valida_registro($pessoa):string{
-    if(strlen($pessoa['password']) < 10)
-        return "A senha deve ter ao menos 10 dígitos.";
-    else if($pessoa['password-confirm'] != $pessoa['password'])
-        return "Senha e confirmação devem ser iguais.";
-    else return "";
+function valida_registro($pessoa):array{
+    $msg = [];
+
+    if(strlen($pessoa['password']) < 10){
+        $msg['erro_password'] = "A senha deve ter ao menos 10 dígitos.";
+        return $msg;
+    }else if($pessoa['password-confirm'] != $pessoa['password']){
+        $msg['erro_confirmacao'] = "Senha e confirmação devem ser iguais.";
+        return $msg;
+    }else{
+        return $msg;
+    } 
 }
 
 function verifica_email($email, $arquivo){
@@ -19,4 +25,8 @@ function verifica_email($email, $arquivo){
     }
 
     return false;
+}
+
+function validate_change_password($user){
+    return valida_registro($user);
 }

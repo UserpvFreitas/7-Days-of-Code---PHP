@@ -12,10 +12,18 @@ function authentication($email, $password):bool{
 } 
 
 function auth_user(){
-    return $_SESSION;
+    $user = $_SESSION;
+
+    $fields = [
+        'field_name' => $user['name'],
+        'field_email' => $user['email']
+    ];
+
+    return $user != null ? $fields : null;
 }
 
 function auth_logout(){
     session_unset();
     header("Location: /");
+    exit;
 }

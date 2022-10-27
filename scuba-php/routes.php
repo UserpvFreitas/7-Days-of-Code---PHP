@@ -4,12 +4,6 @@ function guest_routes(){
         case "register":
             do_register();
             break;        
-        case "forget-password":
-            do_forget();
-            break;
-        case "change_password":
-            do_change_password();
-            break;
         case "mail-validation":
             do_validation($_GET['token']);
             break;
@@ -20,7 +14,7 @@ function guest_routes(){
             do_forget_password();
             break;
         case "change-password":
-            do_change_password();
+            do_change_password($_GET['token']);
             break;
         default:
             do_login();

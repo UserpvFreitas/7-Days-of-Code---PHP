@@ -12,19 +12,19 @@
     <a href="./?page=login"><h1>Scuba<span>PHP</span></h1></a>
     <form action="/?page=register&from=register" method="POST">
         <p>Cadastre Um Novo Usuário</p>
-        <!--<div class="mensagem-sucesso"></div>-->
+        {{sucesso}}
         <label for="nome">Nome</label>
         <input type="text" name="person[name]" required>
-        <!--<span class="mensagem-erro">Mensagem de Erro</span>-->
+        {{erro_nome}}
         <label for="email">E-mail</label>
         <input type="email" name="person[email]" required>
-        <!--<span class="mensagem-erro">Mensagem de Erro</span>-->
+        {{erro_email}}
         <label for="senha">Senha</label>
         <input type="password" name="person[password]" required>
-        <!--<span class="mensagem-erro">Mensagem de Erro</span>-->
+        {{erro_password}}
         <label for="repita-senha">Repita Senha</label>
         <input type="password" name="person[password-confirm]" required>
-        <span class="mensagem-erro"></span>
+        {{erro_confirmacao}}
         <input type="submit" value="Salvar">
     </form>
 </body>

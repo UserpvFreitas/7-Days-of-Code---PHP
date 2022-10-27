@@ -3,7 +3,7 @@ const arquivo = ".\data\users.json";
 
 function crud_create($user){
     $data = file_get_contents(arquivo);
-    $data = json_decode($data);
+    $data = json_decode($data, true);
     $data[] = $user;
     $data = json_encode($data);
     file_put_contents(arquivo, $data);
@@ -22,9 +22,29 @@ function crud_restore($email){
     return null;
 }
 
-function crud_update($email){
+function crud_confirm_email($email){
     $user = crud_restore($email);
     $user['mail_validation'] = true;
+
+    $data = file_get_contents(arquivo);
+    $data = json_decode($data, true);
+    
+    foreach($data as $d){
+        if($d['email'] == $user['email']){
+            $t = array_search($d, $data);
+            unset($data[$t]);
+            $data[] = $user;
+        }
+    }
+    
+    $data = json_encode($data);    
+    file_put_contents(arquivo, $data);
+}
+
+function crud_update($newUser){
+    $user = crud_restore($newUser['email']);
+
+    $user['password'] = $newUser['password'];
 
     $data = file_get_contents(arquivo);
     $data = json_decode($data, true);

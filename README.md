@@ -43,6 +43,7 @@
 
 ## Desafio 4
     > Acrescentar um campo para salvar o usuário recém-criado, uma flag com valor padrão. Após o clique no link do e-mail, essa flag será alterada e, somente após isso, o usuário poderá logar no sistema.
+
     Ao criar um registro, deverá ser enviado um e-mail para o usuário cadastrado, com o link de validação de conta de e-mail
 
 
@@ -57,7 +58,30 @@
 ## Desafio 6    
     > Gerar a página inicial dinamicamente com os dados do usuário logado, desenvolver a funcionalidade de deletar os dados e ativar o botão de logout!
        
-    
+
+## Desafio 7
+    > Gerar o fluxo de alterar senha.
+
+    Quando um usuário clicar em "Esqueci Minha Senha" você receberá uma requisição GET em forget-password. Você sabe qual método HTTP foi usado na requisição com consultando $_SERVER['REQUEST_METHOD'].
+
+    Se chegar um POST, significa que o usuário submeteu o formulário e duas situações diferentes podem acontecer. Para identificar qual, use a função crud_restore($email) (eu não estava brincando quando disse que estava tudo pronto):
+
+        1.  Situação 1 - O email informado existe na base: Envie um email para o usuário. 
+            Concatenar a data de hoje com o email do usuário, pois é interessante que esse link tenha um prazo de expiração. Faça um BASE64 dessa string, e só então invoque a função que encripta a informação. Passe uma mensagem de sucesso e renderize a view referente à rota, exibindo a informação que você passou!
+        2.  Situação 2 - O email informado não existe na base: Passar uma mensagem de erro e renderize a view referente à rota, exibindo a informação que você passou!
+            Quando o usuário clicar no link que você enviou por email, irá disparar uma requisição para a outra rota que você criou no desafio de hoje: change-password.
+            
+            Se for GET, valide o token; caso esteja ok, exiba a view change_password, e não esqueça de injetar o token num input hidden no formulário, pois você irá precisar dessa informação quando o usuário submeter o form. Caso o token falhe, apenas redirecione para / e, se achar pertinente, exiba uma mensagem descrevendo qual erro ocorreu, se o token está corrompido ou expirado, por exemplo.
+
+            Se chegar uma requisição POST - após validar a integridade do token - valide se a senha atende ao critério mínimo que você especificou em /?page=register. Para isso, crie a função validate_change_password($data) no arquivo validation.php.
+
+            Caso haja problema com a integridade do token, faça o mesmo que fez quando tratou a requisição GET. Caso haja problema com o critério mínimo para a senha, exiba novamente a view change_password, exibindo uma mensagem alertando o que ocorreu, e não esqueça de enviar o token novamente para preencher o input:hidden!
+
+            Caso as validações não acusem nenhum erro, use a função crud_restore($email) passando o email encapsulado no token. Atribua o valor da senha nova no campo password, não se esqueça de aplicar MD5 antes de devolver o objeto $user para a função crud_update($user).
+
+    Caso tudo dê certo, redirecione o usuário para /?page=login e exiba uma mensagem informando que deu tudo certo.
+
+
 
     
 
